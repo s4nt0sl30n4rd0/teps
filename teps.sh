@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ScriptBash.sh - Serve de modelo para todos os scripts criados.
+# teps.sh - Troca Espaço Por Sublinhado.
 #
 # Autor:
 #	Leonardo Santos <27875029+s4nt0sl30n4rd0@users.noreply.github.com>
@@ -10,8 +10,8 @@
 #
 # -------------------------------------------------------------------------
 #
-# Este programa não executa nada, apenas serve como modelo para a criação
-# de scripts.
+# Este programa troca espaços em branco por sublinhados em nome de arquivos
+# e diretórios recursivamente.
 #
 # -------------------------------------------------------------------------
 #
@@ -21,4 +21,18 @@
 #
 # -------------------------------------------------------------------------
 
+retorno=0
 
+if [ -n $1 ]
+then
+	local=$1
+else
+	local=$HOME
+fi
+
+while [ $retorno -ne 1 ]
+do
+	find $local -type d,f -print0 | xargs -0 rename 's/ /_/g'
+	find $local -type d,f | grep -c ' '
+	retorno=$?
+done

@@ -21,18 +21,21 @@
 #
 # -------------------------------------------------------------------------
 
-retorno=0
+espaco=1
 
-if [ -n $1 ]
+if [ -n "$1" ]
 then
 	local=$1
 else
 	local=$HOME
 fi
 
-while [ $retorno -ne 1 ]
+cd "$local"
+
+while [ $espaco -ne 0 ]
 do
-	find $local -type d,f -print0 | xargs -0 rename 's/ /_/g'
-	find $local -type d,f | grep -c ' '
-	retorno=$?
+	find -print0 | xargs -0 rename 's/ /_/g' 2> /dev/null
+	espaco=$(find | grep -c ' ')
 done
+
+rename 's/ /_/g' "../$local"

@@ -24,23 +24,26 @@
 #
 # -------------------------------------------------------------------------
 
-espaco=1
+space=1
+
+toRename(){
+	cd "$local"
+	
+	while [ $space -ne 0 ]
+	do
+		find -print0 | xargs -0 rename 's/ /_/g' 2> /dev/null
+		space=$(find | grep -c ' ')
+	done
+}
 
 if [ -n "$1" ]
 then
 	local=$1
+	toRename
+	cd ..
+	local=$(basename "$local")
+	rename 's/ /_/g' "$local"
 else
 	local=$HOME
+	toRename
 fi
-
-cd "$local"
-
-while [ $espaco -ne 0 ]
-do
-	find -print0 | xargs -0 rename 's/ /_/g' 2> /dev/null
-	espaco=$(find | grep -c ' ')
-done
-
-cd ..
-rename 's/ /_/g' "$local"
-#rename 's/ /_/g' "../$local"

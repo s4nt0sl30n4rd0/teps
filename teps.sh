@@ -41,4 +41,6 @@ do
 	espaco=$(find | grep -c ' ')
 done
 
-rename 's/ /_/g' "../$local"
+cd ..
+rename 's/ /_/g' "$local"
+#rename 's/ /_/g' "../$local"

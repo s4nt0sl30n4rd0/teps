@@ -27,14 +27,19 @@
 space=1
 
 toRename(){
-	cd "$local"
+	cd "$local" 2> /dev/null
 	
-	while [ $space -ne 0 ]
-	do
-		find -print0 | xargs -0 rename.ul ' ' '_' * 2> /dev/null
-		#find -print0 | xargs -0 rename 's/ /_/g' 2> /dev/null
-		space=$(find | grep -c ' ')
-	done
+	if [ $? -eq 0 ]
+	then
+		while [ $space -ne 0 ]
+		do
+			find -print0 | xargs -0 rename.ul ' ' '_' * 2> /dev/null
+			space=$(find | grep -c ' ')
+		done
+	else
+		echo 'Error: file or directory not found.'
+		exit 1
+	fi
 }
 
 if [ -n "$1" ]
@@ -44,7 +49,6 @@ then
 	cd ..
 	local=$(basename "$local")
 	rename.ul ' ' '_' "$local"
-	#rename 's/ /_/g' "$local"
 else
 	local=$HOME
 	toRename

@@ -31,7 +31,8 @@ toRename(){
 	
 	while [ $space -ne 0 ]
 	do
-		find -print0 | xargs -0 rename 's/ /_/g' 2> /dev/null
+		find -print0 | xargs -0 rename.ul ' ' '_' * 2> /dev/null
+		#find -print0 | xargs -0 rename 's/ /_/g' 2> /dev/null
 		space=$(find | grep -c ' ')
 	done
 }
@@ -42,7 +43,8 @@ then
 	toRename
 	cd ..
 	local=$(basename "$local")
-	rename 's/ /_/g' "$local"
+	rename.ul ' ' '_' "$local"
+	#rename 's/ /_/g' "$local"
 else
 	local=$HOME
 	toRename

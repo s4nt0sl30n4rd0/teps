@@ -2,23 +2,23 @@
 #
 # teps.sh - Troca Espaço Por Sublinhado.
 #
-# Autor:
+# Author:
 #	Leonardo Santos
 #	<27875029+s4nt0sl30n4rd0@users.noreply.github.com>
 #
-# Manutenção:
+# Maintenance:
 #	Leonardo Santos
 #	<27875029+s4nt0sl30n4rd0@users.noreply.github.com>
 #
 # -------------------------------------------------------------------------
 #
-# Este programa troca espaços em branco por sublinhados em nome de arquivos
-# e diretórios recursivamente. Caso não seja passado um nome ou um caminho
-# para um diretório como parametro, ele será executado no home do usuário.
+# This program swaps spaces by underscores in filenames and directories
+# recursively. If a name or path to a directory is not entered as a
+# parameter, it will be executed in the user's home.
 #
 # -------------------------------------------------------------------------
 #
-# Licença:
+# License:
 #
 #	General Public License 3.0
 #

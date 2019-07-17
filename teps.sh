@@ -50,6 +50,6 @@ then
 	local=$(basename "$local")
 	rename.ul ' ' '_' "$local"
 else
-	local=$HOME
+	local=$PWD
 	toRename
 fi

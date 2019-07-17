@@ -1,8 +1,3 @@
-#!/bin/bash
-#
-# teps.sh - Troca Espaço Por Sublinhado.
-#
-# Author:
 #	Leonardo Santos
 #	<27875029+s4nt0sl30n4rd0@users.noreply.github.com>
 #
@@ -12,9 +7,10 @@
 #
 # -------------------------------------------------------------------------
 #
-# This program swaps spaces by underscores in filenames and directories
-# recursively. If a name or path to a directory is not entered as a
-# parameter, it will be executed in the user's home.
+# This program exchanges spaces for underscores in file and directory names
+# recursively within the given directory, including itself. If a name or
+# path to a directory is not entered as a parameter, it will act in the
+# current directory.
 #
 # -------------------------------------------------------------------------
 #

@@ -20,7 +20,10 @@
 #
 # -------------------------------------------------------------------------
 
+#TODO Colocar dentro do if da toRename, antes do while
 space=1
+
+#TODO Criar variável que guardará o sublinhado ou traço
 
 toRename(){
 	cd "$local" 2> /dev/null
@@ -38,6 +41,7 @@ toRename(){
 	fi
 }
 
+#TODO Implementar opções para traço e help
 if [ -n "$1" ]
 then
 	local=$1

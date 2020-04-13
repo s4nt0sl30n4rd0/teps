@@ -21,7 +21,6 @@
 # -------------------------------------------------------------------------
 
 #TODO Colocar dentro do if da toRename, antes do while
-space=1
 
 #TODO Criar variável que guardará o sublinhado ou traço
 
@@ -30,6 +29,7 @@ toRename(){
 	
 	if [ $? -eq 0 ]
 	then
+		space=1
 		while [ $space -ne 0 ]
 		do
 			find -print0 | xargs -0 rename.ul ' ' '_' * 2> /dev/null

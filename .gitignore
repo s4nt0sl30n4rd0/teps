@@ -1,0 +1,4 @@
+# Temporarios do Vim
+/*.swp
+# Patch's
+/*.patch

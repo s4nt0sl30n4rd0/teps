@@ -59,9 +59,9 @@ toRename(){
 
 if [ -n "$1" ]
 then
-  local=$1
+  target=$1
 
-  cd "$local" \
+  cd "$target" \
   || {
     echo 'Error: file or directory not found.'
     exit 1
@@ -69,14 +69,14 @@ then
   toRename
   cd ..
 
-  local=$(basename "$local")
+  target=$(basename "$target")
 
-  for name in "$local"
+  for name in "$target"
   do
     mv "$name" "${name// /_}"
   done
 else
-  local=$PWD
+  target=$PWD
 
   toRename
 fi

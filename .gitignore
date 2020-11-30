@@ -2,3 +2,5 @@
 /*.swp
 # Patch's
 /*.patch
+# Tarballs
+/*.tar

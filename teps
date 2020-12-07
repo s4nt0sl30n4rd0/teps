@@ -66,15 +66,13 @@ then
     echo 'Error: file or directory not found.'
     exit 1
   }
+
   toRename
   cd ..
 
   target=$(basename "$target")
 
-  for name in "$target"
-  do
-    mv "$name" "${name// /_}"
-  done
+  mv "$target" "${target// /_}"
 else
   target=$PWD
 

@@ -20,8 +20,8 @@
 usage(){
 cat << EOF
 Usage:
-     $(basename $0) [DIR]
-     $(basename $0) [-h]
+     $(basename "$0") [FILE|DIR]
+     $(basename "$0") [-h]
 
      Replaces spaces in file and directory names.
 
@@ -29,8 +29,9 @@ Usage:
      recursively within the given directory, including itself.
 
 Options:
-     DIR Name, relative or absolute path of a directory.
-     -h  Display this help and exit.
+     FILE relative or absolute path of a file.
+     DIR  relative or absolute path of a directory.
+     -h   Display this help and exit.
 
      If a name or path to a directory is not entered as a parameter, it
      will act within the current directory, without including it.
@@ -51,29 +52,43 @@ rename(){
 
   while [ $space -ne 0 ]
   do
-    find -print0 | xargs -0 rename.ul ' ' '_' * 2> /dev/null
-    space=$(find -print0 | grep -c ' ')
+    find . -print0 | xargs -0 rename.ul ' ' '_' ./* 2> /dev/null
+    space=$(find . -print0 | grep -c ' ')
   done
 }
 
 if [ -n "$1" ]
 then
-  target=$1
 
-  cd "$target" \
-  || {
+  [ ! -e "$1" ] \
+  && {
     echo 'Error: file or directory not found.'
     exit 1
   }
 
-  rename
-  cd ..
+  target=$1
 
-  target=$(basename "$target")
+  [ -f "$target" ] \
+  && {
+    mv "$target" "${target// /_}"
+    exit 0
+  }
 
-  mv "$target" "${target// /_}"
+  [ -d "$target" ] \
+  && {
+    cd "$target" || exit 1 
+  
+    rename
+    cd ..
+  
+    target=$(basename "$target")
+  
+    mv "$target" "${target// /_}"
+    exit 0
+  }
 else
   target=$PWD
 
   rename
+  exit 0
 fi

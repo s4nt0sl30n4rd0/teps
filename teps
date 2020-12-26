@@ -21,7 +21,7 @@ usage(){
 cat << EOF
 Usage:
      $(basename "$0") [FILE|DIR]
-     $(basename "$0") [-h]
+     $(basename "$0") [-h|--help]
 
      Replaces spaces in file and directory names.
 
@@ -29,19 +29,19 @@ Usage:
      recursively within the given directory, including itself.
 
 Options:
-     FILE relative or absolute path of a file.
-     DIR  relative or absolute path of a directory.
-     -h   Display this help and exit.
+     FILE      Relative or absolute path of a file.
+     DIR       Relative or absolute path of a directory.
+     -h|--help Display this help and exit.
 
-     If a name or path to a directory is not entered as a parameter, it
-     will act within the current directory, without including it.
+     If a name or path to a file or directory is not entered as a parameter,
+     it will act within the current directory, without including it.
 
 Exit Status:
      Returns 0 for success and 1 for failure.
 EOF
 }
 
-[ "$1" = '-h' ] \
+[[ "$1" = '-h' || "$1" = '--help' ]] \
 && {
   usage
   exit 0

@@ -20,25 +20,30 @@
 usage(){
 cat << EOF
 Usage:
-     $(basename "$0") [FILE|DIR]
+     $(basename "$0") TARGET
+     $(basename "$0") {-r|--recursive DIRECTORY}
      $(basename "$0") [-h|--help]
 
      Replaces spaces in file and directory names.
 
      Exchanges spaces for underscores in file and directory names
-     recursively within the given directory, including itself.
+     recursively (or not) within the given directory, including itself.
 
 Options:
-     FILE      Relative or absolute path of a file.
-     DIR       Relative or absolute path of a directory.
-     -h|--help Display this help and exit.
-
-     If a name or path to a file or directory is not entered as a parameter,
-     it will act within the current directory, without including it.
+     TARGET          Relative or absolute path of a file or directory.
+     DIRECTORY       Relative or absolute path of a directory.
+     -r|--recursive  Replace recursively.
+     -h|--help       Display this help and exit.
 
 Exit Status:
      Returns 0 for success and 1 for failure.
 EOF
+}
+
+[ -z "$1" ] \
+&& {
+  usage
+  exit 1
 }
 
 [[ "$1" = '-h' || "$1" = '--help' ]] \
@@ -52,43 +57,40 @@ rename(){
 
   while [ $space -ne 0 ]
   do
-    find . -print0 | xargs -0 rename.ul ' ' '_' ./* 2> /dev/null
+    find . -print0 | xargs -0 rename.ul ' ' '_' ./* 2>&-
     space=$(find . -print0 | grep -c ' ')
   done
 }
 
-if [ -n "$1" ]
-then
+[[ "$1" = '-r' || "$1" = '--recursive' ]] \
+&& {
+  shift
 
-  [ ! -e "$1" ] \
+  [[ ! -d "$1" || -z "$1" ]] \
   && {
-    echo 'Error: file or directory not found.'
+    echo 'Error: directory not found.'
     exit 1
   }
 
-  target=$1
-
-  [ -f "$target" ] \
-  && {
-    mv "$target" "${target// /_}"
-    exit 0
-  }
-
-  [ -d "$target" ] \
-  && {
-    cd "$target" || exit 1 
-  
-    rename
-    cd ..
-  
-    target=$(basename "$target")
-  
-    mv "$target" "${target// /_}"
-    exit 0
-  }
-else
-  target=$PWD
-
+  cd "$1" || exit 1
   rename
+  cd ..
+  
+  target=$(basename "$1")
+  
+  mv "$target" "${target// /_}" 2>&-
   exit 0
-fi
+}
+
+[ ! -e "$1" ] \
+&& {
+  echo 'Error: file or directory not found.'
+  exit 1
+}
+
+cd "$(dirname "$1")" || exit 1
+
+target=$(basename "$1")
+
+mv "$target" "${target// /_}"
+exit 0

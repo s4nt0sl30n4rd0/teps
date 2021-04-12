@@ -1,19 +1,25 @@
 PREFIX ?= /usr
-MANDIR ?= $(PREFIX)/share/man
+#MANDIR ?= $(PREFIX)/share/man
 DOCDIR ?= $(PREFIX)/share/doc/teps
 
 all:
-	@echo Run \'make install\' to install teps.
+	@echo Options: install or uninstall.
 
 install:
-	@mkdir -p $(DESTDIR)$(PREFIX)/bin
-	@mkdir -p $(DESTDIR)$(MANDIR)/man1
-	@mkdir -p $(DESTDIR)$(DOCDIR)
-	@cp -p teps $(DESTDIR)$(PREFIX)/bin/teps
-	@cp -p teps.1 $(DESTDIR)$(MANDIR)/man1
-	@chmod 755 $(DESTDIR)$(PREFIX)/bin/teps
+#	@mkdir -p $(MANDIR)/man1
+	@mkdir -p $(DOCDIR)
+	@cp -p teps $(PREFIX)/bin/teps
+	@chmod 755 $(PREFIX)/bin/teps
+	@cp -p README.md $(DOCDIR)
+#	@cp -p teps.1 $(MANDIR)/man1
+ifneq ($(shell ls -d /etc/apt 2>&-),/etc/apt)
+	@ln -s /usr/bin/rename /usr/bin/rename.ul
+endif
 
 uninstall:
-	@rm -rf $(DESTDIR)$(PREFIX)/bin/teps
-	@rm -rf $(DESTDIR)$(MANDIR)/man1/teps.1*
-	@rm -rf $(DESTDIR)$(DOCDIR)
+	@rm -f $(PREFIX)/bin/teps
+#	@rm -f $(MANDIR)/man1/teps.1
+	@rm -rf $(DOCDIR)
+ifneq ($(shell ls -d /etc/apt 2>&-),/etc/apt)
+	@rm -f /usr/bin/rename.ul
+endif

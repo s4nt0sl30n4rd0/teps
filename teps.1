@@ -1,0 +1,37 @@
+.\" -*- nroff -*-
+.TH TEPS 1 "16 Apr 2021" "Leonardo Santos"
+.SH NAME
+.TP
+teps \- Replaces spaces in file and directory names.
+.SH SYNOPSIS
+.TP
+teps TARGET
+.TP
+teps [\-r] DIRECTORY
+.TP
+teps -h
+.SH DESCRIPTION
+.TP
+.B teps
+exchanges spaces for underscores in file and directory names
+recursively (or not) within the given directory, including itself.
+.SH OPTIONS
+.TP
+.B TARGET
+Relative or absolute path of a file or directory.
+.TP
+.B DIRECTORY
+Relative or absolute path of a directory.
+.TP
+.B \-r \-\-recursive
+Replace recursively.
+.TP
+.B \-h \-\-help
+Display this help and exit.
+.SH EXIT STATUS
+.TP
+.B 0
+For success.
+.TP
+.B 1
+For failure.

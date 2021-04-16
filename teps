@@ -88,9 +88,12 @@ rename(){
   exit 1
 }
 
-cd "$(dirname "$1")" || exit 1
-
-target=$(basename "$1")
-
-mv "$target" "${target// /_}"
-exit 0
+[ -e "$1" ] \
+&& {
+  cd "$(dirname "$1")" || exit 1
+  
+  target=$(basename "$1")
+  
+  mv "$target" "${target// /_}"
+  exit 0
+}

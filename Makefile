@@ -12,16 +12,16 @@ install:
 	@cp -p teps $(PREFIX)/bin
 	@chmod 755 $(PREFIX)/bin/teps
 	@cp -p README.md $(DOCDIR)
-	@gzip teps.1
-	@cp -p teps.1.gz $(MANDIR)
-ifneq (@ls -d /etc/apt 2>&-,/etc/apt)
+	@cp -p teps.1 $(MANDIR)
+	@gzip $(MANDIR)/teps.1
+ifneq ($(shell ls -d /etc/apt 2>&-),/etc/apt)
 	@ln -s /usr/bin/rename $(PREFIX)/bin/rename.ul
 endif
 
 uninstall:
 	@rm -f $(PREFIX)/bin/teps
-	@rm -f $(MANDIR)/man1/teps.1
+	@rm -f $(MANDIR)/teps.1.gz
 	@rm -rf $(DOCDIR)
-ifneq (@ls -d /etc/apt 2>&-,/etc/apt)
+ifneq ($(shell ls -d /etc/apt 2>&-),/etc/apt)
 	@rm -f $(PREFIX)/bin/rename.ul
 endif

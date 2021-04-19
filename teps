@@ -75,9 +75,9 @@ rename(){
   cd "$1" || exit 1
   rename
   cd ..
-  
+
   target=$(basename "$1")
-  
+
   mv "$target" "${target// /_}" 2>&-
   exit 0
 }
@@ -91,9 +91,9 @@ rename(){
 [ -e "$1" ] \
 && {
   cd "$(dirname "$1")" || exit 1
-  
+
   target=$(basename "$1")
-  
+
   mv "$target" "${target// /_}"
   exit 0
 }

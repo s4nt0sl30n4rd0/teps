@@ -2,7 +2,7 @@
 #
 # teps: replaces spaces in file and directory names.
 #
-# Copyright (C) 2018-2020 Leonardo Santos <https://github.com/s4nt0sl30n4rd0/>
+# Copyright (C) 2018-2021 Leonardo Santos <https://github.com/s4nt0sl30n4rd0/>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -94,6 +94,6 @@ rename(){
 
   target=$(basename "$1")
 
-  mv "$target" "${target// /_}"
+  mv "$target" "${target// /_}" 2>&-
   exit 0
 }

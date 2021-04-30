@@ -22,8 +22,11 @@ teps -h
 ## Options
 
 **TARGET**              Relative or absolute path of a file or directory.
+
 **DIRECTORY**           Name, relative or absolute path of a directory.
+
 **-r**, **--recursive** Replace recursively.
+
 **-h**, **--help**      Display this help and exit.
 
 ## Uninstall

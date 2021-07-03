@@ -6,22 +6,18 @@ all:
 	@echo Options: \'make install\' or \'make uninstall\'.
 
 install:
-	@mkdir -p $(PREFIX)/bin
-	@mkdir -p $(MANDIR)
-	@mkdir -p $(DOCDIR)
-	@cp -p teps $(PREFIX)/bin
-	@chmod 755 $(PREFIX)/bin/teps
-	@cp -p README.md $(DOCDIR)
-	@cp -p teps.1 $(MANDIR)
-	@gzip $(MANDIR)/teps.1
+	@install -m 755 -D teps $(DESTDIR)$(PREFIX)/bin/teps
+	@install -m 644 -D README.md $(DESTDIR)$(DOCDIR)/README.md
+	@install -m 644 -D teps.1 $(DESTDIR)$(MANDIR)/teps.1
+	@gzip $(DESTDIR)$(MANDIR)/teps.1
 ifneq ($(shell ls -d /etc/apt 2>&-),/etc/apt)
-	@ln -s /usr/bin/rename $(PREFIX)/bin/rename.ul
+	@ln -s /usr/bin/rename $(DESTDIR)$(PREFIX)/bin/rename.ul
 endif
 
 uninstall:
-	@rm -f $(PREFIX)/bin/teps
-	@rm -f $(MANDIR)/teps.1.gz
-	@rm -rf $(DOCDIR)
+	@rm -f $(DESTDIR)$(PREFIX)/bin/teps
+	@rm -f $(DESTDIR)$(MANDIR)/teps.1.gz
+	@rm -rf $(DESTDIR)$(DOCDIR)
 ifneq ($(shell ls -d /etc/apt 2>&-),/etc/apt)
-	@rm -f $(PREFIX)/bin/rename.ul
+	@rm -f $(DESTDIR)$(PREFIX)/bin/rename.ul
 endif

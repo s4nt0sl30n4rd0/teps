@@ -57,7 +57,7 @@ rename(){
 
   while [ $space -ne 0 ]
   do
-    find . -print0 | xargs -0 rename.ul ' ' '_' ./* 2>&-
+    find . -print0 | xargs -0 prename 's/ /_/' ./* 2>&-
     space=$(find . -print0 | grep -c ' ')
   done
 }

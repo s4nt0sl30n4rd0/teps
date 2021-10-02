@@ -10,6 +10,7 @@ $ git clone https://github.com/s4nt0sl30n4rd0/teps
 $ cd teps/
 $ make install
 ```
+It depends on the rename command provided by Perl.
 
 ## Usage
 
@@ -21,13 +22,12 @@ teps -h
 
 ## Options
 
-**TARGET**              Relative or absolute path of a file or directory.
-
-**DIRECTORY**           Name, relative or absolute path of a directory.
-
-**-r**, **--recursive** Replace recursively.
-
-**-h**, **--help**      Display this help and exit.
+| Name | Description |
+| --- | --- |
+| TARGET | Relative or absolute path of a file or directory. |
+| DIRECTORY | Name, relative or absolute path of a directory. |
+| -r, --recursive | Replace recursively. |
+| -h, --help | Display this help and exit. |
 
 ## Uninstall
 
